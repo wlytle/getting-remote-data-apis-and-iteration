@@ -45,7 +45,7 @@ require 'rest-client'
 character_data = RestClient.get('http://swapi.dev/api/people/1')
 
 puts character_data
-=> "{\"name\":\"Luke Skywalker\",\"height\":\"172\",\"mass\":\"77\",\"hair_color\":\"blond\",\"skin_color\":\"fair\",\"eye_color\":\"blue\",\"birth_year\":\"19BBY\",\"gender\":\"male\",\"homeworld\":\"http://www.swapi.dev/api/planets/1/\",\"films\":[\"http://www.swapi.dev/api/films/6/\",\"http://www.swapi.dev/api/films/3/\",\"http://www.swapi.dev/api/films/2/\",\"http://www.swapi.dev/api/films/1/\",\"http://www.swapi.dev/api/films/7/\"],\"species\":[\"http://www.swapi.dev/api/species/1/\"],\"vehicles\":[\"http://www.swapi.dev/api/vehicles/14/\",\"http://www.swapi.dev/api/vehicles/30/\"],\"starships\":[\"http://www.swapi.dev/api/starships/12/\",\"http://www.swapi.dev/api/starships/22/\"],\"created\":\"2014-12-09T13:50:51.644000Z\",\"edited\":\"2014-12-20T21:17:56.891000Z\",\"url\":\"http://www.swapi.dev/api/people/1/\"}"
+=> "{\"name\":\"Luke Skywalker\",\"height\":\"172\",\"mass\":\"77\",\"hair_color\":\"blond\",\"skin_color\":\"fair\",\"eye_color\":\"blue\",\"birth_year\":\"19BBY\",\"gender\":\"male\",\"homeworld\":\"http://swapi.dev/api/planets/1/\",\"films\":[\"http://swapi.dev/api/films/6/\",\"http://swapi.dev/api/films/3/\",\"http://swapi.dev/api/films/2/\",\"http://swapi.dev/api/films/1/\",\"http://swapi.dev/api/films/7/\"],\"species\":[\"http://swapi.dev/api/species/1/\"],\"vehicles\":[\"http://swapi.dev/api/vehicles/14/\",\"http://swapi.dev/api/vehicles/30/\"],\"starships\":[\"http://swapi.dev/api/starships/12/\",\"http://swapi.dev/api/starships/22/\"],\"created\":\"2014-12-09T13:50:51.644000Z\",\"edited\":\"2014-12-20T21:17:56.891000Z\",\"url\":\"http://swapi.dev/api/people/1/\"}"
 ```
 
 Uh-oh, you might be thinking. The `character_data` variable that we used to capture the response from the API *isn't a nested hash*, it's a crazy long ugly-looking string.
@@ -165,14 +165,14 @@ Then, you need to make a web request to each of those URLs using Rest Client. Co
 ```ruby
 def get_character_movies_from_api(character)
   #make the web request
-  response_string = RestClient.get('http://www.swapi.dev/api/people/')
+  response_string = RestClient.get('http://swapi.dev/api/people/')
   response_hash = JSON.parse(all_characters)
 
    # your code here
 end
 ```
 
-**Important:** You might be wondering: how do I iterate over the `response_hash` if I don't know what it looks like? Well, there are a couple of options. First of all, you can use `Pry` to freeze the program right after the `response_hash` is defined, and examine that hash in the terminal. Or, you can play around with the Star Wars API [here](https://swapi.dev/). If you fill out the form to make a request to `http://www.swapi.dev/people/`, you should see something like this:
+**Important:** You might be wondering: how do I iterate over the `response_hash` if I don't know what it looks like? Well, there are a couple of options. First of all, you can use `Pry` to freeze the program right after the `response_hash` is defined, and examine that hash in the terminal. Or, you can play around with the Star Wars API [here](https://swapi.dev/). If you fill out the form to make a request to `http://swapi.dev/people/`, you should see something like this:
 
 ```ruby
 {
