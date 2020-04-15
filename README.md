@@ -2,7 +2,7 @@
 
 ## Objectives
 
-1. Use Ruby to programmatically make a web request to the [Star Wars API](https://swapi.co/).
+1. Use Ruby to programmatically make a web request to the [Star Wars API](https://swapi.dev/).
 2. Use iteration and other techniques to parse a nested hash for specific information.
 
 ![](https://curriculum-content.s3.amazonaws.com/module-1/getting-remote-data-apis-and-iteration/Image_136_StarWarsLego.jpg)
@@ -42,10 +42,10 @@ Let's take a quick look at sending a web request to the Star Wars API:
 
 ```ruby
 require 'rest-client'
-character_data = RestClient.get('http://swapi.co/api/people/1')
+character_data = RestClient.get('http://swapi.dev/api/people/1')
 
 puts character_data
-=> "{\"name\":\"Luke Skywalker\",\"height\":\"172\",\"mass\":\"77\",\"hair_color\":\"blond\",\"skin_color\":\"fair\",\"eye_color\":\"blue\",\"birth_year\":\"19BBY\",\"gender\":\"male\",\"homeworld\":\"http://www.swapi.co/api/planets/1/\",\"films\":[\"http://www.swapi.co/api/films/6/\",\"http://www.swapi.co/api/films/3/\",\"http://www.swapi.co/api/films/2/\",\"http://www.swapi.co/api/films/1/\",\"http://www.swapi.co/api/films/7/\"],\"species\":[\"http://www.swapi.co/api/species/1/\"],\"vehicles\":[\"http://www.swapi.co/api/vehicles/14/\",\"http://www.swapi.co/api/vehicles/30/\"],\"starships\":[\"http://www.swapi.co/api/starships/12/\",\"http://www.swapi.co/api/starships/22/\"],\"created\":\"2014-12-09T13:50:51.644000Z\",\"edited\":\"2014-12-20T21:17:56.891000Z\",\"url\":\"http://www.swapi.co/api/people/1/\"}"
+=> "{\"name\":\"Luke Skywalker\",\"height\":\"172\",\"mass\":\"77\",\"hair_color\":\"blond\",\"skin_color\":\"fair\",\"eye_color\":\"blue\",\"birth_year\":\"19BBY\",\"gender\":\"male\",\"homeworld\":\"http://www.swapi.dev/api/planets/1/\",\"films\":[\"http://www.swapi.dev/api/films/6/\",\"http://www.swapi.dev/api/films/3/\",\"http://www.swapi.dev/api/films/2/\",\"http://www.swapi.dev/api/films/1/\",\"http://www.swapi.dev/api/films/7/\"],\"species\":[\"http://www.swapi.dev/api/species/1/\"],\"vehicles\":[\"http://www.swapi.dev/api/vehicles/14/\",\"http://www.swapi.dev/api/vehicles/30/\"],\"starships\":[\"http://www.swapi.dev/api/starships/12/\",\"http://www.swapi.dev/api/starships/22/\"],\"created\":\"2014-12-09T13:50:51.644000Z\",\"edited\":\"2014-12-20T21:17:56.891000Z\",\"url\":\"http://www.swapi.dev/api/people/1/\"}"
 ```
 
 Uh-oh, you might be thinking. The `character_data` variable that we used to capture the response from the API *isn't a nested hash*, it's a crazy long ugly-looking string.
@@ -68,26 +68,26 @@ JSON.parse(character_data)
       "eye_color": "Blue",
       "birth_year": "19 BBY",
       "gender": "Male",
-      "homeworld": "http://swapi.co/api/planets/1/",
+      "homeworld": "http://swapi.dev/api/planets/1/",
       "films": [
-          "http://swapi.co/api/films/1/",
-          "http://swapi.co/api/films/2/",
-          "http://swapi.co/api/films/3/"
+          "http://swapi.dev/api/films/1/",
+          "http://swapi.dev/api/films/2/",
+          "http://swapi.dev/api/films/3/"
       ],
       "species": [
-          "http://swapi.co/api/species/1/"
+          "http://swapi.dev/api/species/1/"
       ],
       "vehicles": [
-          "http://swapi.co/api/vehicles/14/",
-          "http://swapi.co/api/vehicles/30/"
+          "http://swapi.dev/api/vehicles/14/",
+          "http://swapi.dev/api/vehicles/30/"
       ],
       "starships": [
-          "http://swapi.co/api/starships/12/",
-          "http://swapi.co/api/starships/22/"
+          "http://swapi.dev/api/starships/12/",
+          "http://swapi.dev/api/starships/22/"
       ],
       "created": "2014-12-09T13:50:51.644000Z",
       "edited": "2014-12-10T13:52:43.172000Z",
-      "url": "http://swapi.co/api/people/1/"
+      "url": "http://swapi.dev/api/people/1/"
 }
 
 ```
@@ -165,19 +165,19 @@ Then, you need to make a web request to each of those URLs using Rest Client. Co
 ```ruby
 def get_character_movies_from_api(character)
   #make the web request
-  response_string = RestClient.get('http://www.swapi.co/api/people/')
+  response_string = RestClient.get('http://www.swapi.dev/api/people/')
   response_hash = JSON.parse(all_characters)
 
    # your code here
 end
 ```
 
-**Important:** You might be wondering: how do I iterate over the `response_hash` if I don't know what it looks like? Well, there are a couple of options. First of all, you can use `Pry` to freeze the program right after the `response_hash` is defined, and examine that hash in the terminal. Or, you can play around with the Star Wars API [here](https://swapi.co/). If you fill out the form to make a request to `http://www.swapi.co/people/`, you should see something like this:
+**Important:** You might be wondering: how do I iterate over the `response_hash` if I don't know what it looks like? Well, there are a couple of options. First of all, you can use `Pry` to freeze the program right after the `response_hash` is defined, and examine that hash in the terminal. Or, you can play around with the Star Wars API [here](https://swapi.dev/). If you fill out the form to make a request to `http://www.swapi.dev/people/`, you should see something like this:
 
 ```ruby
 {
 	"count": 87,
-	"next": "http://swapi.co/api/people/?page=2",
+	"next": "http://swapi.dev/api/people/?page=2",
 	"previous": null,
 	"results": [
 		{
@@ -189,28 +189,28 @@ end
 			"eye_color": "blue",
 			"birth_year": "19BBY",
 			"gender": "male",
-			"homeworld": "http://swapi.co/api/planets/1/",
+			"homeworld": "http://swapi.dev/api/planets/1/",
 			"films": [
-				"http://swapi.co/api/films/6/",
-				"http://swapi.co/api/films/3/",
-				"http://swapi.co/api/films/2/",
-				"http://swapi.co/api/films/1/",
-				"http://swapi.co/api/films/7/"
+				"http://swapi.dev/api/films/6/",
+				"http://swapi.dev/api/films/3/",
+				"http://swapi.dev/api/films/2/",
+				"http://swapi.dev/api/films/1/",
+				"http://swapi.dev/api/films/7/"
 			],
 			"species": [
-				"http://swapi.co/api/species/1/"
+				"http://swapi.dev/api/species/1/"
 			],
 			"vehicles": [
-				"http://swapi.co/api/vehicles/14/",
-				"http://swapi.co/api/vehicles/30/"
+				"http://swapi.dev/api/vehicles/14/",
+				"http://swapi.dev/api/vehicles/30/"
 			],
 			"starships": [
-				"http://swapi.co/api/starships/12/",
-				"http://swapi.co/api/starships/22/"
+				"http://swapi.dev/api/starships/12/",
+				"http://swapi.dev/api/starships/22/"
 			],
 			"created": "2014-12-09T13:50:51.644000Z",
 			"edited": "2014-12-20T21:17:56.891000Z",
-			"url": "http://swapi.co/api/people/1/"
+			"url": "http://swapi.dev/api/people/1/"
 		},
 		{
 			"name": "C-3PO",
@@ -221,23 +221,23 @@ end
 			"eye_color": "yellow",
 			"birth_year": "112BBY",
 			"gender": "n/a",
-			"homeworld": "http://swapi.co/api/planets/1/",
+			"homeworld": "http://swapi.dev/api/planets/1/",
 			"films": [
-				"http://swapi.co/api/films/5/",
-				"http://swapi.co/api/films/4/",
-				"http://swapi.co/api/films/6/",
-				"http://swapi.co/api/films/3/",
-				"http://swapi.co/api/films/2/",
-				"http://swapi.co/api/films/1/"
+				"http://swapi.dev/api/films/5/",
+				"http://swapi.dev/api/films/4/",
+				"http://swapi.dev/api/films/6/",
+				"http://swapi.dev/api/films/3/",
+				"http://swapi.dev/api/films/2/",
+				"http://swapi.dev/api/films/1/"
 			],
 			"species": [
-				"http://swapi.co/api/species/2/"
+				"http://swapi.dev/api/species/2/"
 			],
 			"vehicles": [],
 			"starships": [],
 			"created": "2014-12-10T15:10:51.357000Z",
 			"edited": "2014-12-20T21:17:50.309000Z",
-			"url": "http://swapi.co/api/people/2/"
+			"url": "http://swapi.dev/api/people/2/"
 		},
 		{
 			"name": "R2-D2",
@@ -248,24 +248,24 @@ end
 			"eye_color": "red",
 			"birth_year": "33BBY",
 			"gender": "n/a",
-			"homeworld": "http://swapi.co/api/planets/8/",
+			"homeworld": "http://swapi.dev/api/planets/8/",
 			"films": [
-				"http://swapi.co/api/films/5/",
-				"http://swapi.co/api/films/4/",
-				"http://swapi.co/api/films/6/",
-				"http://swapi.co/api/films/3/",
-				"http://swapi.co/api/films/2/",
-				"http://swapi.co/api/films/1/",
-				"http://swapi.co/api/films/7/"
+				"http://swapi.dev/api/films/5/",
+				"http://swapi.dev/api/films/4/",
+				"http://swapi.dev/api/films/6/",
+				"http://swapi.dev/api/films/3/",
+				"http://swapi.dev/api/films/2/",
+				"http://swapi.dev/api/films/1/",
+				"http://swapi.dev/api/films/7/"
 			],
 			"species": [
-				"http://swapi.co/api/species/2/"
+				"http://swapi.dev/api/species/2/"
 			],
 			"vehicles": [],
 			"starships": [],
 			"created": "2014-12-10T15:11:50.376000Z",
 			"edited": "2014-12-20T21:17:50.311000Z",
-			"url": "http://swapi.co/api/people/3/"
+			"url": "http://swapi.dev/api/people/3/"
 		},
 		{
 			"name": "Darth Vader",
@@ -276,23 +276,23 @@ end
 			"eye_color": "yellow",
 			"birth_year": "41.9BBY",
 			"gender": "male",
-			"homeworld": "http://swapi.co/api/planets/1/",
+			"homeworld": "http://swapi.dev/api/planets/1/",
 			"films": [
-				"http://swapi.co/api/films/6/",
-				"http://swapi.co/api/films/3/",
-				"http://swapi.co/api/films/2/",
-				"http://swapi.co/api/films/1/"
+				"http://swapi.dev/api/films/6/",
+				"http://swapi.dev/api/films/3/",
+				"http://swapi.dev/api/films/2/",
+				"http://swapi.dev/api/films/1/"
 			],
 			"species": [
-				"http://swapi.co/api/species/1/"
+				"http://swapi.dev/api/species/1/"
 			],
 			"vehicles": [],
 			"starships": [
-				"http://swapi.co/api/starships/13/"
+				"http://swapi.dev/api/starships/13/"
 			],
 			"created": "2014-12-10T15:18:20.704000Z",
 			"edited": "2014-12-20T21:17:50.313000Z",
-			"url": "http://swapi.co/api/people/4/"
+			"url": "http://swapi.dev/api/people/4/"
 		},
 		{
 			"name": "Leia Organa",
@@ -303,24 +303,24 @@ end
 			"eye_color": "brown",
 			"birth_year": "19BBY",
 			"gender": "female",
-			"homeworld": "http://swapi.co/api/planets/2/",
+			"homeworld": "http://swapi.dev/api/planets/2/",
 			"films": [
-				"http://swapi.co/api/films/6/",
-				"http://swapi.co/api/films/3/",
-				"http://swapi.co/api/films/2/",
-				"http://swapi.co/api/films/1/",
-				"http://swapi.co/api/films/7/"
+				"http://swapi.dev/api/films/6/",
+				"http://swapi.dev/api/films/3/",
+				"http://swapi.dev/api/films/2/",
+				"http://swapi.dev/api/films/1/",
+				"http://swapi.dev/api/films/7/"
 			],
 			"species": [
-				"http://swapi.co/api/species/1/"
+				"http://swapi.dev/api/species/1/"
 			],
 			"vehicles": [
-				"http://swapi.co/api/vehicles/30/"
+				"http://swapi.dev/api/vehicles/30/"
 			],
 			"starships": [],
 			"created": "2014-12-10T15:20:09.791000Z",
 			"edited": "2014-12-20T21:17:50.315000Z",
-			"url": "http://swapi.co/api/people/5/"
+			"url": "http://swapi.dev/api/people/5/"
 		},
 		{
 			"name": "Owen Lars",
@@ -331,20 +331,20 @@ end
 			"eye_color": "blue",
 			"birth_year": "52BBY",
 			"gender": "male",
-			"homeworld": "http://swapi.co/api/planets/1/",
+			"homeworld": "http://swapi.dev/api/planets/1/",
 			"films": [
-				"http://swapi.co/api/films/5/",
-				"http://swapi.co/api/films/6/",
-				"http://swapi.co/api/films/1/"
+				"http://swapi.dev/api/films/5/",
+				"http://swapi.dev/api/films/6/",
+				"http://swapi.dev/api/films/1/"
 			],
 			"species": [
-				"http://swapi.co/api/species/1/"
+				"http://swapi.dev/api/species/1/"
 			],
 			"vehicles": [],
 			"starships": [],
 			"created": "2014-12-10T15:52:14.024000Z",
 			"edited": "2014-12-20T21:17:50.317000Z",
-			"url": "http://swapi.co/api/people/6/"
+			"url": "http://swapi.dev/api/people/6/"
 		},
 		{
 			"name": "Beru Whitesun lars",
@@ -355,20 +355,20 @@ end
 			"eye_color": "blue",
 			"birth_year": "47BBY",
 			"gender": "female",
-			"homeworld": "http://swapi.co/api/planets/1/",
+			"homeworld": "http://swapi.dev/api/planets/1/",
 			"films": [
-				"http://swapi.co/api/films/5/",
-				"http://swapi.co/api/films/6/",
-				"http://swapi.co/api/films/1/"
+				"http://swapi.dev/api/films/5/",
+				"http://swapi.dev/api/films/6/",
+				"http://swapi.dev/api/films/1/"
 			],
 			"species": [
-				"http://swapi.co/api/species/1/"
+				"http://swapi.dev/api/species/1/"
 			],
 			"vehicles": [],
 			"starships": [],
 			"created": "2014-12-10T15:53:41.121000Z",
 			"edited": "2014-12-20T21:17:50.319000Z",
-			"url": "http://swapi.co/api/people/7/"
+			"url": "http://swapi.dev/api/people/7/"
 		},
 		{
 			"name": "R5-D4",
@@ -379,18 +379,18 @@ end
 			"eye_color": "red",
 			"birth_year": "unknown",
 			"gender": "n/a",
-			"homeworld": "http://swapi.co/api/planets/1/",
+			"homeworld": "http://swapi.dev/api/planets/1/",
 			"films": [
-				"http://swapi.co/api/films/1/"
+				"http://swapi.dev/api/films/1/"
 			],
 			"species": [
-				"http://swapi.co/api/species/2/"
+				"http://swapi.dev/api/species/2/"
 			],
 			"vehicles": [],
 			"starships": [],
 			"created": "2014-12-10T15:57:50.959000Z",
 			"edited": "2014-12-20T21:17:50.321000Z",
-			"url": "http://swapi.co/api/people/8/"
+			"url": "http://swapi.dev/api/people/8/"
 		},
 		{
 			"name": "Biggs Darklighter",
@@ -401,20 +401,20 @@ end
 			"eye_color": "brown",
 			"birth_year": "24BBY",
 			"gender": "male",
-			"homeworld": "http://swapi.co/api/planets/1/",
+			"homeworld": "http://swapi.dev/api/planets/1/",
 			"films": [
-				"http://swapi.co/api/films/1/"
+				"http://swapi.dev/api/films/1/"
 			],
 			"species": [
-				"http://swapi.co/api/species/1/"
+				"http://swapi.dev/api/species/1/"
 			],
 			"vehicles": [],
 			"starships": [
-				"http://swapi.co/api/starships/12/"
+				"http://swapi.dev/api/starships/12/"
 			],
 			"created": "2014-12-10T15:59:50.509000Z",
 			"edited": "2014-12-20T21:17:50.323000Z",
-			"url": "http://swapi.co/api/people/9/"
+			"url": "http://swapi.dev/api/people/9/"
 		},
 		{
 			"name": "Obi-Wan Kenobi",
@@ -425,31 +425,31 @@ end
 			"eye_color": "blue-gray",
 			"birth_year": "57BBY",
 			"gender": "male",
-			"homeworld": "http://swapi.co/api/planets/20/",
+			"homeworld": "http://swapi.dev/api/planets/20/",
 			"films": [
-				"http://swapi.co/api/films/5/",
-				"http://swapi.co/api/films/4/",
-				"http://swapi.co/api/films/6/",
-				"http://swapi.co/api/films/3/",
-				"http://swapi.co/api/films/2/",
-				"http://swapi.co/api/films/1/"
+				"http://swapi.dev/api/films/5/",
+				"http://swapi.dev/api/films/4/",
+				"http://swapi.dev/api/films/6/",
+				"http://swapi.dev/api/films/3/",
+				"http://swapi.dev/api/films/2/",
+				"http://swapi.dev/api/films/1/"
 			],
 			"species": [
-				"http://swapi.co/api/species/1/"
+				"http://swapi.dev/api/species/1/"
 			],
 			"vehicles": [
-				"http://swapi.co/api/vehicles/38/"
+				"http://swapi.dev/api/vehicles/38/"
 			],
 			"starships": [
-				"http://swapi.co/api/starships/48/",
-				"http://swapi.co/api/starships/59/",
-				"http://swapi.co/api/starships/64/",
-				"http://swapi.co/api/starships/65/",
-				"http://swapi.co/api/starships/74/"
+				"http://swapi.dev/api/starships/48/",
+				"http://swapi.dev/api/starships/59/",
+				"http://swapi.dev/api/starships/64/",
+				"http://swapi.dev/api/starships/65/",
+				"http://swapi.dev/api/starships/74/"
 			],
 			"created": "2014-12-10T16:16:29.192000Z",
 			"edited": "2014-12-20T21:17:50.325000Z",
-			"url": "http://swapi.co/api/people/10/"
+			"url": "http://swapi.dev/api/people/10/"
 		}
 	]
 }
